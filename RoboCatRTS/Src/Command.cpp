@@ -192,7 +192,7 @@ SwitchTeamCommandPtr SwitchTeamCommand::StaticCreate(uint32_t inNetworkId, const
 	//can only issue commands to this unit if I own it, and it's a cat
 	if (go && go->GetClassId() == RoboCat::kClassId && go->GetPlayerId() == playerId)
 	{
-		retVal = std::make_shared< BuildCommand >();
+		retVal = std::make_shared< SwitchTeamCommand >();
 		retVal->mNetworkId = inNetworkId;
 		retVal->mPlayerId = playerId;
 		retVal->mTargetTeamId = targetTeamId;
@@ -233,7 +233,7 @@ MeowCommandPtr MeowCommand::StaticCreate(uint32_t inNetworkId)
 	//can only issue commands to this unit if I own it, and it's a cat
 	if (go && go->GetClassId() == RoboCat::kClassId && go->GetPlayerId() == playerId)
 	{
-		retVal = std::make_shared< BuildCommand >();
+		retVal = std::make_shared< MeowCommand >();
 		retVal->mNetworkId = inNetworkId;
 		retVal->mPlayerId = playerId;
 	}
@@ -253,7 +253,7 @@ void MeowCommand::ProcessCommand()
 	{
 		RoboCat* rc = obj->GetAsCat();
 
-		rc->enterMeowState();
+		rc->EnterMeowState();
 	}
 }
 
